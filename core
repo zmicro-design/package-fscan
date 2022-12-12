@@ -18,6 +18,21 @@ install() {
   local tmp_file="$name"
   local bin_file="$tmp_file"
 
+  local rest=""
+  if [ "$platform" = "darwin" ]; then
+    if [ "$arch" = "arm64" ]; then
+      rest="darwin_arm64"
+    else
+      rest="darwin"
+    fi
+  else
+    if [ "$arch" = "arm64" ]; then
+      rest="fscan_arm64"
+    else
+      rest="fscan_amd64"
+    fi
+  fi
+
   # prepare context
   cd $tmp_dir
 
@@ -28,7 +43,7 @@ install() {
   #   https://github.com/shadow1ng/fscan/releases/download/1.8.2/fscan_amd64
   #   https://github.com/shadow1ng/fscan/releases/download/1.8.2/fscan_arm64
   # generate url
-  local url="${PACKAGE_CORE_RELEASE_DOWNLOAD}/$PACKAGE_CORE_VERSION/${name}-${PACKAGE_CORE_VERSION#v}-${platform}-${arch}"
+  local url="${PACKAGE_CORE_RELEASE_DOWNLOAD}/${PACKAGE_CORE_VERSION#v}/${name}_${rest}"
   log::debug "[$(timestamp)][package][$name][$kernel][$arch] url: $url, file: ${tmp_file}, tmp_dir: $tmp_dir"
 
   # download

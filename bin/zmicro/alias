@@ -9,7 +9,8 @@ help() {
 }
 
 version() {
-  fscan --version
+  # fscan --version
+  echo "v1.8.2"
 }
 
 core() {
