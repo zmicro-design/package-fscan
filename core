@@ -27,9 +27,9 @@ install() {
     fi
   else
     if [ "$arch" = "arm64" ]; then
-      rest="fscan_arm64"
+      rest="arm64"
     else
-      rest="fscan_amd64"
+      rest="amd64"
     fi
   fi
 
